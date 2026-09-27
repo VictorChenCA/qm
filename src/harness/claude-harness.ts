@@ -58,6 +58,7 @@ import {
   zeroUsage,
   type PiReplayMessage,
 } from "./replay.ts";
+import { cncOnlyHookOptions, withCncHooks } from "./cnc-bridge.ts";
 
 export interface ClaudeHarnessOptions extends HarnessToolPlumbing {
   modelId?: string | ((scope?: ScopeId) => string | undefined);
@@ -453,7 +454,7 @@ export function createClaudeHarness(opts: ClaudeHarnessOptions = {}): Harness {
         ...(allowSubagents ? { agents: childAgents } : {}),
         ...(allowSubagents
           ? {
-              hooks: {
+              hooks: withCncHooks({
                 PreToolUse: [
                   {
                     matcher: "mcp__qm__.*",
@@ -476,9 +477,9 @@ export function createClaudeHarness(opts: ClaudeHarnessOptions = {}): Harness {
                     ],
                   },
                 ],
-              },
+              }),
             }
-          : {}),
+          : cncOnlyHookOptions()),
         permissionMode: "bypassPermissions",
         allowDangerouslySkipPermissions: true,
         persistSession: false,

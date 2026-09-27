@@ -1,5 +1,7 @@
 # qm
 
+> **This fork (Own Your Intelligence hackathon, Sep 27 2026):** QM agents can report to [C&C](https://github.com/VictorChenCA/OYIHack), an RTS command center that visualizes the swarm. Set `QM_CNC_HOOK_URL`. See [docs/cnc-bridge.md](docs/cnc-bridge.md).
+
 A multiplayer agent harness for work. In Slack and on the web.
 
 ## Setup
